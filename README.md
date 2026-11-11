@@ -2,173 +2,150 @@
 
 ## Project Overview
 
-The **Online Food Ordering System** is a relational database project
-developed using MySQL. It stores and manages information about
-restaurants, their food menus, customers, orders, and payments.
+The Online Food Ordering System is a relational database project developed using MySQL. It is designed to store and manage information about restaurants, food menus, customers, orders, and payments.
 
-The project demonstrates database concepts such as table creation,
-primary and foreign keys, data insertion, data manipulation, string and
-date functions, aggregate functions, joins, subqueries, views,
-transactions, stored procedures, and triggers.
+This project demonstrates important database concepts, including database creation, table creation, primary keys, foreign keys, data insertion, data manipulation, string functions, date functions, aggregate functions, joins, subqueries, views, transactions, stored procedures, and triggers.
 
 ## Technologies Used
 
--   **Database:** MySQL
--   **Language:** SQL
--   **Database concepts:** Relational schema, primary keys, foreign
-    keys, joins, views, transactions, stored procedures, and triggers
+- Database: MySQL
+- Query Language: SQL
+- Database Management Tool: MySQL Workbench
+- Database Concepts: Relational schema, primary keys, foreign keys, joins, views, transactions, stored procedures, and triggers.
 
 ## Database Name
 
-``` sql
-RESTAURANT_ONLINE_FOOD
-```
+`RESTAURANT_ONLINE_FOOD`
 
 ## Database Schema
 
-The database contains five main tables:
+The database consists of five main tables:
 
-  -----------------------------------------------------------------------
-  Table                   Purpose                 Primary Key
-  ----------------------- ----------------------- -----------------------
-  `RESTAURANTS`           Stores restaurant       `RESTAURANT_ID`
-                          names, locations, and   
-                          cuisine types.          
+| Table | Purpose | Primary Key |
+|---|---|---|
+| RESTAURANTS | Stores restaurant names, locations, and cuisine types. | RESTAURANT_ID |
+| MENU | Stores food items, prices, availability, and the restaurant offering each item. | MENU_ID |
+| CUSTOMERS | Stores customer names, phone numbers, and cities. | CUSTOMER_ID |
+| ORDERS | Stores customer orders, selected menu items, quantities, order dates, and order statuses. | ORDER_ID |
+| PAYMENTS | Stores payment methods, amounts, statuses, and payment dates for orders. | PAYMENT_ID |
 
-  `MENU`                  Stores food items,      `MENU_ID`
-                          prices, availability,   
-                          and the restaurant      
-                          offering each item.     
+## Relationships
 
-  `CUSTOMERS`             Stores customer names,  `CUSTOMER_ID`
-                          phone numbers, and      
-                          cities.                 
+The database contains the following relationships:
 
-  `ORDERS`                Stores customer orders, `ORDER_ID`
-                          selected menu items,    
-                          quantities, dates, and  
-                          order statuses.         
+1. RESTAURANTS to MENU: One restaurant can offer multiple menu items, but each menu item belongs to only one restaurant.
 
-  `PAYMENTS`              Stores payment methods, `PAYMENT_ID`
-                          amounts, statuses, and  
-                          payment dates for       
-                          orders.                 
-  -----------------------------------------------------------------------
+2. MENU to ORDERS: One menu item can appear in multiple orders, while each order record refers to one menu item.
 
-### Relationships
+3. CUSTOMERS to ORDERS: One customer can place multiple orders, but each order belongs to one customer.
 
--   **RESTAURANTS to MENU:** One restaurant can offer multiple menu
-    items. Each menu item belongs to one restaurant.
--   **MENU to ORDERS:** One menu item can appear in multiple orders.
-    Each order record refers to one menu item.
--   **CUSTOMERS to ORDERS:** One customer can place multiple orders.
-    Each order belongs to one customer.
--   **ORDERS to PAYMENTS:** The ER diagram represents this as a
-    one-to-one relationship. The current SQL schema has a foreign key
-    from `PAYMENTS.ORDER_ID` to `ORDERS.ORDER_ID`, but does not declare
-    it `UNIQUE`; therefore, the SQL schema currently permits multiple
-    payment records for one order.
-
-## ER Diagram
-
-The entity-relationship diagram for the project is provided as:
-
-`erd_online_food.png`
-
-It illustrates the five main entities, their attributes, and the
-relationships between them.
+4. ORDERS to PAYMENTS: The ER diagram represents a one-to-one relationship. However, the current SQL schema does not define a UNIQUE constraint on PAYMENTS.ORDER_ID, so multiple payment records can be associated with the same order.
 
 ## Setup and Execution
 
-1.  Install and open MySQL Workbench or another MySQL client.
-2.  Open the `PROJECT.sql` file.
-3.  Execute the script using a MySQL connection.
-4.  The script creates the database and tables, inserts sample records,
-    and runs the listed SQL queries.
+Follow these steps to execute the project:
 
-The database can also be selected manually with:
+1. Install and open MySQL Workbench or another MySQL client.
+2. Open the `PROJECT.sql` file.
+3. Connect to the MySQL server.
+4. Execute the SQL script.
+5. The script creates the database and tables, inserts sample records, and executes the available SQL queries.
 
-``` sql
+To select the database manually, execute:
+
+```sql
 USE RESTAURANT_ONLINE_FOOD;
 ```
 
 ## Sample Data
 
-The SQL script inserts sample records for:
+The SQL script contains the following sample records:
 
--   5 restaurants
--   10 menu items
--   10 customers
--   12 orders
--   12 payment records
+- 5 Restaurants
+- 10 Menu Items
+- 10 Customers
+- 12 Orders
+- 12 Payment Records
 
-The sample data uses restaurant and customer locations in cities such as
-Hyderabad, Bengaluru, Chennai, Vijayawada, and Visakhapatnam.
+The sample data includes restaurant and customer locations in cities such as Hyderabad, Bengaluru, Chennai, Vijayawada, and Visakhapatnam.
 
 ## SQL Concepts Demonstrated
 
-The script includes examples of the following:
+The project demonstrates the following SQL concepts:
 
-1.  **DDL (Data Definition Language):** `CREATE DATABASE`,
-    `CREATE TABLE`, and `CREATE VIEW`.
-2.  **DML (Data Manipulation Language):** `INSERT`, `UPDATE`, and
-    `DELETE`.
-3.  **String functions:** `UPPER()`, `LOWER()`, `LEFT()`, `CONCAT_WS()`,
-    and `REPLACE()`.
-4.  **Date functions:** `DAYNAME()`, `DATEDIFF()`, and `DATE_FORMAT()`.
-5.  **Aggregate functions:** `COUNT()`, `AVG()`, `SUM()`, and `MAX()`.
-6.  **Joins:** `INNER JOIN` and `LEFT JOIN`.
-7.  **Subqueries:** Queries using nested `SELECT` statements.
-8.  **Views:** `CUSTOMER_ORDER_HISTORY` and `RESTAURANT_REVENUE`.
-9.  **Transactions:** `START TRANSACTION`, `SAVEPOINT`, `ROLLBACK TO`,
-    and `COMMIT`.
-10. **Stored procedures and triggers:** These are included as project
-    requirements/call examples, but their definitions need to be added
-    to the current SQL script (see Notes).
+1. **DDL (Data Definition Language):** CREATE DATABASE, CREATE TABLE, and CREATE VIEW.
+
+2. **DML (Data Manipulation Language):** INSERT, UPDATE, and DELETE.
+
+3. **String Functions:** UPPER(), LOWER(), LEFT(), CONCAT_WS(), and REPLACE().
+
+4. **Date Functions:** DAYNAME(), DATEDIFF(), and DATE_FORMAT().
+
+5. **Aggregate Functions:** COUNT(), AVG(), SUM(), and MAX().
+
+6. **Joins:** INNER JOIN and LEFT JOIN.
+
+7. **Subqueries:** Nested SELECT statements to retrieve data based on specific conditions.
+
+8. **Views:** CUSTOMER_ORDER_HISTORY and RESTAURANT_REVENUE.
+
+9. **Transactions:** START TRANSACTION, SAVEPOINT, ROLLBACK TO, and COMMIT.
+
+10. **Stored Procedures:** Reusable SQL programs designed to perform specific database operations.
+
+11. **Triggers:** Automatic execution of SQL statements in response to INSERT, UPDATE, or DELETE operations.
 
 ## Views
 
-### `CUSTOMER_ORDER_HISTORY`
+The project includes the following views:
 
-Displays: - Customer name - Restaurant name - Menu item - Quantity -
-Order status
+### 1. CUSTOMER_ORDER_HISTORY
 
-### `RESTAURANT_REVENUE`
+This view displays customer order information, including:
 
-Displays: - Restaurant name - Total number of orders - Total payment
-amount
+- Customer name
+- Restaurant name
+- Menu item
+- Quantity
+- Order status
+
+### 2. RESTAURANT_REVENUE
+
+This view displays restaurant revenue information, including:
+
+- Restaurant name
+- Total number of orders
+- Total payment amount
 
 ## Additional Tables for Trigger Exercises
 
-The script creates two tables intended for trigger-based history:
+The project includes two additional tables for maintaining order history:
 
--   `ORDERS_ARCHIVE` --- intended to store details of deleted orders.
--   `ORDER_STATUS_HISTORY` --- intended to record an order's previous
-    status, new status, order ID, and change date.
+1. ORDERS_ARCHIVE: Intended to store details of deleted orders.
+
+2. ORDER_STATUS_HISTORY: Intended to record the order ID, previous status, new status, and date of status changes.
+
+These tables are designed to support trigger-based auditing and historical record management.
 
 ## Notes and Improvements
 
-The current `PROJECT.sql` script contains calls and test statements for
-stored procedures and triggers, but does not include their complete
-definitions:
+The current `PROJECT.sql` script contains stored procedure calls and trigger-related tables, but their complete definitions need to be added.
 
--   `CALL ALL_ORDERS(301);` and `CALL TOTAL_SPENT(301);` are present,
-    but `CREATE PROCEDURE` statements for these procedures are not
-    included.
--   The archive and status-history tables are created, but the
-    `CREATE TRIGGER` statements that populate them are not included.
--   If the intended relationship between `ORDERS` and `PAYMENTS` is
-    one-to-one, add a `UNIQUE` constraint to `PAYMENTS.ORDER_ID`.
--   The script updates orders from `PREPARING` to `DELIVERED` before
-    later examples. Run the script in order and be aware that updates
-    and deletes change the sample data.
--   For a repeatable setup, use a fresh database or add appropriate
-    cleanup statements before re-running the script, because the
-    database and table creation statements do not use `IF NOT EXISTS`.
+- The statements `CALL ALL_ORDERS(301);` and `CALL TOTAL_SPENT(301);` are included, but their corresponding CREATE PROCEDURE definitions are missing.
+
+- The ORDERS_ARCHIVE and ORDER_STATUS_HISTORY tables are created, but the CREATE TRIGGER statements required to populate them are not included.
+
+- To enforce a one-to-one relationship between ORDERS and PAYMENTS, add a UNIQUE constraint to PAYMENTS.ORDER_ID.
+
+- The script updates orders from PREPARING to DELIVERED before executing later examples. Therefore, execute the script in the correct order.
+
+- For repeated execution, use a fresh database or add appropriate cleanup statements before creating the database and tables again.
 
 ## Project Files
 
-``` text
+The project directory contains the following files:
+
+```text
 .
 ├── PROJECT.sql
 ├── erd_online_food.png
@@ -177,7 +154,6 @@ definitions:
 
 ## Conclusion
 
-This project provides a practical example of designing and querying a
-relational database for an online food ordering scenario. It connects
-restaurants, menus, customers, orders, and payments, while demonstrating
-commonly used MySQL operations and database programming concepts.
+The Online Food Ordering System provides a practical implementation of relational database concepts using MySQL. It demonstrates how restaurants, menus, customers, orders, and payments can be efficiently organized and managed through SQL.
+
+The project provides hands-on experience with database design, data manipulation, data retrieval, reporting, and database programming concepts. It also helps develop practical SQL skills that are useful in real-world database management applications.
